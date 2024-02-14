@@ -15,8 +15,13 @@ class APIService {
     //   headers: {'Authorization' : 'Basic ${api.apiKey}'},
     // );
 
-    final response = await http.post(api.tokenUri(),
-        body: {'username': email, 'password': password, 'api_key': '121212'});
+    final response = await http.post(
+      api.tokenUri(),
+      body: {
+        'username': email,
+        'password': password,
+      },
+    );
 
     if (response.statusCode == 200) {
       final data = json.decode(response.body);
@@ -32,22 +37,20 @@ class APIService {
     throw response;
   }
 
-  Future<String> getEndpointData({required String accessToken}) async {
-    const url = 'http://103.141.9.234/himsmobappapi/api/v1/hidm/user/registration?api_key=121212';
-    Uri uri = Uri.parse(url);
-    final response = await http.post(uri, headers: {'Authorization': 'Bearer $accessToken'});
-
-    if (response.statusCode == 200) {
-      final data = json.decode(response.body);
-
-      final String result = data["message"][0]["email"];
-
-      return result;
-
-    }
-    print('Request $uri failed\nResponse: ${response.statusCode}  ${response.reasonPhrase}');
-    throw response;
-  }
-
+// Future<String> getEndpointData({required String accessToken}) async {
+//   const url = 'http://103.141.9.234/himsmobappapi/api/v1/hidm/user/registration?api_key=121212';
+//   Uri uri = Uri.parse(url);
+//   final response = await http.post(uri, headers: {'Authorization': 'Bearer $accessToken'});
+//
+//   if (response.statusCode == 200) {
+//     final data = json.decode(response.body);
+//
+//     final String result = data["message"][0]["email"];
+//
+//     return result;
+//
+//   }
+//   print('Request $uri failed\nResponse: ${response.statusCode}  ${response.reasonPhrase}');
+//   throw response;
+// }
 }
-

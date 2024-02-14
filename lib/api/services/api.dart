@@ -19,23 +19,29 @@ enum Endpoint {
 
 
 class API {
-  API({required this.apiKey});
+  API({required this.host});
 
-  final String apiKey;
+  final String host;
 
-  factory API.sandbox() => API(apiKey: APIKeys.liveApi);
+  factory API.sandbox() => API(host: APIKeys.liveHost);
+  factory API.production() => API(host: APIKeys.localHost);
 
 
   //static final String host = 'http://103.141.9.234/himsmobappapi/login';
 
-  // Uri tokenUri() => Uri(
-  //
-  //   scheme: 'http',
-  //   host: host,
-  //   path: 'token',
-  // );
+  Uri tokenUri() {
+    return Uri(
 
-  Uri tokenUri() => Uri.parse(API.sandbox().apiKey);
+      scheme: 'http',
+      host: host,
+      path: '/himsmobappapi/api/v1/user/login',
+      queryParameters: {
+        'api_key': '121212',
+      },
+    );
+  }
+
+  //Uri tokenUri() => Uri.parse(API.sandbox().apiKey);
 
 
   static Map<Endpoint, String> _paths = {

@@ -42,10 +42,10 @@ class _MyHomePageState extends State<MyHomePage> {
   void _updateAccessToken() async {
     final apiService = APIService(API.sandbox());
     final accessToken = await apiService.getAccessToken('sadmin', 'hydro#2024');
-    final gmail = await apiService.getEndpointData(accessToken: accessToken);
+    // final gmail = await apiService.getEndpointData(accessToken: accessToken);
     setState(() {
       _accessToken = accessToken;
-      _gmail = gmail;
+      // _gmail = gmail;
     });
 
   }
@@ -70,10 +70,10 @@ class _MyHomePageState extends State<MyHomePage> {
               _accessToken,
               style: Theme.of(context).textTheme.headlineMedium,
             ),
-            Text(
-              _gmail,
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
+            // Text(
+            //   _gmail,
+            //   style: Theme.of(context).textTheme.headlineMedium,
+            // ),
           ],
         ),
       ),
