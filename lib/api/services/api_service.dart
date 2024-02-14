@@ -37,6 +37,27 @@ class APIService {
     throw response;
   }
 
+  Future<dynamic> getEndpointData(
+      {required String accessToken, required Endpoint endpoint}) async {
+    final uri = api.endpointUri(endpoint);
+    final response = await http.post(
+      uri,
+      body: {'keyword': 'Bog', 'date': '12-02-2024'},
+      headers: {'Authorization': 'Bearer $accessToken'},
+
+    );
+
+    if (response.statusCode == 200) {
+      final data = json.decode(response.body);
+      dynamic result = data['hr6'];
+      return result;
+    }
+
+    print(
+        'Request $uri failed\nResponse: ${response.statusCode} ${response.reasonPhrase}');
+    throw response;
+  }
+
 // Future<String> getEndpointData({required String accessToken}) async {
 //   const url = 'http://103.141.9.234/himsmobappapi/api/v1/hidm/user/registration?api_key=121212';
 //   Uri uri = Uri.parse(url);

@@ -37,14 +37,17 @@ class _MyHomePageState extends State<MyHomePage> {
 
   String _accessToken = '';
   String _gmail = '';
+  dynamic _ffwcData = '';
 
 
   void _updateAccessToken() async {
     final apiService = APIService(API.sandbox());
-    final accessToken = await apiService.getAccessToken('sadmin', 'hydro#2024');
+    final accessToken = await apiService.getAccessToken('01767009920@ffwcsms', 'leodev#2023');
+    dynamic data = await apiService.getEndpointData(accessToken: accessToken, endpoint: Endpoint.getFFWC);
     // final gmail = await apiService.getEndpointData(accessToken: accessToken);
     setState(() {
       _accessToken = accessToken;
+      _ffwcData = data;
       // _gmail = gmail;
     });
 
@@ -70,6 +73,13 @@ class _MyHomePageState extends State<MyHomePage> {
               _accessToken,
               style: Theme.of(context).textTheme.headlineMedium,
             ),
+
+            Text(
+              _ffwcData,
+              style: Theme.of(context).textTheme.displayMedium,
+            ),
+
+
             // Text(
             //   _gmail,
             //   style: Theme.of(context).textTheme.headlineMedium,

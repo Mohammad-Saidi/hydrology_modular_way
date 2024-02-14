@@ -5,14 +5,18 @@
 import 'api_keys.dart';
 
 
-enum Endpoint {
-  cases,
-  casesSuspected,
-  casesConfirmed,
-  deaths,
-  recovered,
-}
+// enum Endpoint {
+//   cases,
+//   casesSuspected,
+//   casesConfirmed,
+//   deaths,
+//   recovered,
+// }
 
+
+enum Endpoint {
+  getFFWC,
+}
 
 
 
@@ -41,15 +45,37 @@ class API {
     );
   }
 
+
+  Uri endpointUri(Endpoint endpoint) {
+    return Uri(
+      scheme: 'http',
+      host: host,
+      path: _paths[endpoint],
+      queryParameters: {
+        'api_key': '121212',
+      },
+    );
+  }
+
+
+
+
+
+
+
   //Uri tokenUri() => Uri.parse(API.sandbox().apiKey);
 
 
+  // static Map<Endpoint, String> _paths = {
+  //   Endpoint.cases: 'cases',
+  //   Endpoint.casesSuspected: 'casesSuspected',
+  //   Endpoint.casesConfirmed: 'casesConfirmed',
+  //   Endpoint.deaths: 'deaths',
+  //   Endpoint.recovered: 'recovered',
+  // };
+
   static Map<Endpoint, String> _paths = {
-    Endpoint.cases: 'cases',
-    Endpoint.casesSuspected: 'casesSuspected',
-    Endpoint.casesConfirmed: 'casesConfirmed',
-    Endpoint.deaths: 'deaths',
-    Endpoint.recovered: 'recovered',
+    Endpoint.getFFWC: '/himsmobappapi/api/v1/get/ffwc/station-data',
   };
 
 
